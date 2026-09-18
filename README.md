@@ -13,7 +13,3 @@ The source code lives in the [AdNauseam](https://github.com/mneunomne/AdNauseam)
 ## Changelog
 
 See the [_Releases_](https://github.com/dhowe/AdNauseam-lite/releases) section.
-
-## Issues
-
-AdNauseam MV3 _extension_ issues can be reported [here](https://github.com/dhowe/AdNauseam-lite/issues).
