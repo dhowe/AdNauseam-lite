@@ -1,0 +1,3 @@
+[submodule "AdNauseam"]
+	path = AdNauseam
+	url = https://github.com/mneunomne/AdNauseam.git

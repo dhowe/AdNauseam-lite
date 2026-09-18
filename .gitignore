@@ -141,3 +141,12 @@ dist
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 .vite/
+
+# From the uBOL-home layout
+/build/
+/tmp/
+*.bak
+*.pem
+__pycache__/
+.DS_Store
+xcuserdata/

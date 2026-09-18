@@ -1,0 +1,70 @@
+name: AdNauseam MV3 release
+
+on: workflow_dispatch
+
+permissions:
+  contents: read
+
+# Adapted from uBO Lite's release workflow:
+# https://github.com/uBlockOrigin/uBOL-home/blob/main/.github/workflows/create_release.yml
+
+jobs:
+  build:
+    permissions:
+      contents: write # for creating release
+    name: Build packages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v5
+        with:
+          persist-credentials: false
+          submodules: recursive
+
+      - name: Locate AdNauseam repo
+        run: |
+          ADNL_REPO_DIR=$(pwd)
+          ADN_REPO_DIR="$ADNL_REPO_DIR/AdNauseam"
+          echo "ADN_REPO_DIR=$ADN_REPO_DIR" >> $GITHUB_ENV
+
+      # Version, time-based
+      - name: Create unique time-based version
+        run: |
+          TAGNAME=$(date -u "+%Y").$(date -u "+%-m*100+%-d" | bc).$(date -u "+%H*100+%M" | bc)
+          echo "TAGNAME=$TAGNAME" >> $GITHUB_ENV
+          echo "Version: $TAGNAME"
+
+      # The CodeMirror bundle is not committed in its submodule
+      - name: Build CodeMirror bundle
+        run: |
+          cd $ADN_REPO_DIR/platform/mv3/extension/lib/codemirror/codemirror-ubol
+          npm ci
+          npm run build
+
+      # Chromium
+      - name: Build Chromium AdNauseam MV3
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          cd $ADN_REPO_DIR
+          tools/make-mv3.sh chromium ${{ env.TAGNAME }}
+          echo "CHROMIUM_PACKAGE=AdnauseamLite_${{ env.TAGNAME }}.chromium.zip" >> $GITHUB_ENV
+          cd - > /dev/null
+
+      - name: Assemble release text
+        run: |
+          sed -e 's/%tag%/${{ env.TAGNAME }}/g' .github/workflows/RELEASE_BODY.md > release_body0.txt
+          grep -m1 -B10000 -- "----------" CHANGELOG.md | head -n -2 > release_notes.txt
+          sed -e '/%changelog%/{r release_notes.txt' -e 'd}' release_body0.txt > release_body.txt
+
+      - name: Create GitHub release
+        id: create_release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh release create ${{ env.TAGNAME }} \
+          --title "${{ env.TAGNAME }}" \
+          --prerelease \
+          --notes-file release_body.txt
+          gh release upload ${{ env.TAGNAME }} \
+          ${{ env.ADN_REPO_DIR }}/dist/build/${{ env.CHROMIUM_PACKAGE }}
