@@ -1,6 +1,6 @@
 **AdNauseam MV3**, the [MV3 API-based](https://developer.chrome.com/docs/extensions/mv3/intro/) version of [AdNauseam](https://adnauseam.io).
 
-- [Source code](https://github.com/mneunomne/AdNauseam/tree/master/platform/mv3)
+- [Source code](https://github.com/dhowe/AdNauseam/tree/master/platform/mv3)
 
 ## Release notes
 
