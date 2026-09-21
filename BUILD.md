@@ -7,7 +7,7 @@ Releases are produced by the [_AdNauseam MV3 release_](.github/workflows/create_
 
 ```sh
 git submodule update --remote AdNauseam
-git add AdNauseam CHANGELOG.md   # update CHANGELOG.md with the release notes
+git add AdNauseam CHANGELOG.md
 git commit -m "point at <commit>"
 git push
 ```
