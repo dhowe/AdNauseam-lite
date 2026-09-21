@@ -1,14 +1,3 @@
-# AdNauseam MV3
-
-| Browser | Install from ... |
-| --- | --- |
-| Chromium | <a href="https://github.com/dhowe/AdNauseam-lite/releases">Self-distributed</a> |
-
-## Description
-
-**AdNauseam MV3** is the [MV3 API](https://developer.chrome.com/docs/extensions/develop/migrate/what-is-mv3)-based version of [AdNauseam](https://adnauseam.io), built on top of uBO Lite.
-
-The source code lives in the [AdNauseam](https://github.com/dhowe/AdNauseam) repository, under `platform/mv3`. This repository holds it as a git submodule and publishes the release packages.
 
 ## Building
 
@@ -55,7 +44,3 @@ tools/make-mv3.sh chromium 2026.920.2003  # + publishable zip, as the workflow d
 The unpacked extension lands in `dist/build/ADNLite.chromium/` — load it with _Load unpacked_ in `chrome://extensions` (_Developer mode_ enabled). With a version argument the packaged zip is written to `dist/build/`.
 
 Other platforms (`firefox`, `edge`, `safari`) are accepted by the script but are not currently released from this repository.
-
-## Changelog
-
-See the [_Releases_](https://github.com/dhowe/AdNauseam-lite/releases) section.
