@@ -1,3 +1,8 @@
+- Avoid same domain ad collection 
+
+----------
+
+
 - Properly implement per-site strict-blocking respect per list adn-allow
 - Fix strict-block from requests from subframes on a domain set to be strict-blocked
 - Testing tools for strict blocking
