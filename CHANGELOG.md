@@ -1,3 +1,8 @@
+- Disable logging by default + add debug option on dashboard
+- Avoid duplicate ad collection
+
+----------
+
 - Avoid same domain ad collection 
 
 ----------
