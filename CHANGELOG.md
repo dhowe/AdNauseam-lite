@@ -1,3 +1,9 @@
+
+- Fix bugs on stutus change from menu 
+- Implement Trusted and Strict domain interface tabs
+
+----------
+
 - Disable logging by default + add debug option on dashboard
 - Avoid duplicate ad collection
 
